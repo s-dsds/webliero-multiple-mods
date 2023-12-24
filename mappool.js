@@ -110,6 +110,7 @@ function loadSubPool(poolURL, callback) {
 function next() {
     (async () => {
         if (shouldChangeMod()) {
+            if (currMod<0) currMod = 0
             setNextRandomMod();
             let cm = getCurrentMod();
             let cms = modpool[cm]
