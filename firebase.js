@@ -154,7 +154,7 @@ function delMapLast() {
 }
 
 /** modpool */
-function listenForPoolEvents() {
+function listenForModsEvents() {
     modsRef.on('child_added', loadnewMod);
     modsRef.on('child_changed', loadnewMod);
     modsRef.on('child_removed', removeMap);
