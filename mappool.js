@@ -114,11 +114,12 @@ function next() {
             setNextRandomMod();
             let cm = getCurrentMod();
             let cms = modpool[cm]
+            console.log("mod", cm, JSON.stringify(cms))
             await loadMod(cms.url);
             printCurrentMod('current mod is ',null,COLORS.ANNOUNCE_BRIGHT);
             window.WLROOM.setSettings(cms.settings);
             currState=GAME_RUNNING_STATE;
-            votes.reset();
+       //     votes.reset();
             window.WLROOM.restartGame();
         }
         resolveNextMap();
