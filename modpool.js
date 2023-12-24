@@ -76,7 +76,7 @@ function shuffleModPool() {
     shuffleArray(modpoolrand);
 }
 
-chainFunction(room, 'onGameStart', setModAdvance) 
+chainFunction(window.WLROOM, 'onGameStart', setModAdvance) 
 
 COMMAND_REGISTRY.add("clearmodcache", ["!clearmodcache: clears the entire modcache"], (player, ...name) => {
     modCache = new Map();
