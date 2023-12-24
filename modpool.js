@@ -1,7 +1,7 @@
 var modCache = new Map();
 var modpool = [];
 var modpoolrand = []
-var currMod = 0;
+var currMod = -1;
 var randomizeFightMod = false;
 
 let modBaseUrl = 'https://webliero.gitlab.io/webliero-mods'
@@ -52,7 +52,8 @@ function setRandomFightMod(off=false) {
 
 let maxRoundsPerMod = 3;
 function shouldChangeMod() {
-    return randomizeFightMod && roundPlayedOnThatMod>=maxRoundsPerMod
+    console.log("should change mod",  currMod<0 || (randomizeFightMod && roundPlayedOnThatMod>=maxRoundsPerMod))
+    return currMod<0 || (randomizeFightMod && roundPlayedOnThatMod>=maxRoundsPerMod)
 }
 
 var lastPlayedMod = null;
