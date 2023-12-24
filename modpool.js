@@ -73,7 +73,7 @@ function setModAdvance() {
 }
 
 function shuffleModPool() {
-    modpoolrand = Array.from(modpool);
+    modpoolrand = Array.from(modpool.keys);
     shuffleArray(modpoolrand);
 }
 
