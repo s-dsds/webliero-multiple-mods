@@ -58,6 +58,7 @@ function shouldChangeMod() {
 
 var lastPlayedMod = null;
 var roundPlayedOnThatMod = 0;
+var timeoutAdvance = null;
 
 function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
     let str = modpool[getCurrentMod()].name
@@ -65,13 +66,18 @@ function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
 }
 
 let setModAdvance = () => {
-    let cms = modpoolrand[currMod]
-    if (cms!==lastPlayedMod) {
-        roundPlayedOnThatMod=0
-    }
-    console.log(`setModAdvance ${cms} prev ${lastPlayedMod} current games ${roundPlayedOnThatMod+1} max rounds ${maxRoundsPerMod}`)
-    lastPlayedMod = cms
-    roundPlayedOnThatMod++    
+    if (timeoutAdvance===null) return;
+
+    timeoutAdvance = setTimeout(() => {
+        let cms = modpoolrand[currMod]
+        if (cms!==lastPlayedMod) {
+            roundPlayedOnThatMod=0
+        }
+        console.log(`setModAdvance ${cms} prev ${lastPlayedMod} current games ${roundPlayedOnThatMod+1} max rounds ${maxRoundsPerMod}`)
+        lastPlayedMod = cms
+        roundPlayedOnThatMod++ 
+        timeoutAdvance = null;
+    }, 500)   
 }
 
 function shuffleModPool() {
@@ -101,5 +107,22 @@ COMMAND_REGISTRY.add(["randommod","rm"], ["!randommod #number# or !rm #number: s
         announce(`mod is set to be randomized after ${maxRoundsPerMod} game`+(maxRoundsPerMod?'s':''), null, COLORS.ANNOUNCE);
     }
     
+    return false;
+},  COMMAND.ADMIN_ONLY);
+
+COMMAND_REGISTRY.add("mod", ["!mod xxx: sets current mod, lists mods if invalid or empty"], (player, modidx = "") => {
+    if (""==modidx || typeof modpool[modidx] == "undefined") {
+        announce(`invalid mod, choose between 0 and ${modpool.length-1}`, player, COLORS.WARNING);        
+        return false;
+    }
+    if (randomizeFightMod) {
+        announce(`random mod off`, player, COLORS.ANNOUNCE_BRIGHT, "small");
+        randomizeFightMod=0
+
+    }
+    let mod = modpool[modidx]
+    currMod = modpoolrand.indexOf(mod);
+   
+    printCurrentMod('current fight mod set to ', null, COLORS.ANNOUNCE_BRIGHT)    
     return false;
 },  COMMAND.ADMIN_ONLY);
