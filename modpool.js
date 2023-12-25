@@ -64,12 +64,14 @@ function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
     announce(msg+str, player, color);
 }
 
-function setModAdvance() {
-    if (modpoolrand[currMod]!=lastPlayedMod) {
-        roundPlayedOnThatMod=1
+let setModAdvance = () => {
+    let cms = modpoolrand[currMod]
+    if (cms!==lastPlayedMod) {
+        roundPlayedOnThatMod=0
     }
-    lastPlayedMod = modpoolrand[currMod]
-    roundPlayedOnThatMod++
+    console.log(`setModAdvance ${cms} prev ${lastPlayedMod} current games ${roundPlayedOnThatMod+1} max rounds ${maxRoundsPerMod}`)
+    lastPlayedMod = cms
+    roundPlayedOnThatMod++    
 }
 
 function shuffleModPool() {
