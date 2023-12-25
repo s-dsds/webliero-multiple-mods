@@ -65,7 +65,8 @@ function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
     announce(msg+str, player, color);
 }
 
-let setModAdvance = () => {
+const setModAdvance = () => {
+    console.log("setModAdvance", timeoutAdvance)
     if (timeoutAdvance===null) return;
 
     timeoutAdvance = setTimeout(() => {
@@ -120,8 +121,7 @@ COMMAND_REGISTRY.add("mod", ["!mod xxx: sets current mod, lists mods if invalid 
         randomizeFightMod=0
 
     }
-    let mod = modpool[modidx]
-    currMod = modpoolrand.indexOf(mod);
+    currMod = modpoolrand.indexOf(+modidx);
    
     printCurrentMod('current fight mod set to ', null, COLORS.ANNOUNCE_BRIGHT)    
     return false;
