@@ -99,8 +99,7 @@ COMMAND_REGISTRY.add("clearmodcache", ["!clearmodcache: clears the entire modcac
 
 
 COMMAND_REGISTRY.add(["randommod","rm"], ["!randommod #number# or !rm #number: switches to random fight mod, use '!randommod 0' to switch off"], (player, num ='0')=> {
-
-    let maxRoundsPerMod=+num;
+    maxRoundsPerMod=+num;
     setRandomFightMod(maxRoundsPerMod==0);
     if (maxRoundsPerMod==0) {
         printCurrentMod(`mod is set to mod: `);        
@@ -118,10 +117,10 @@ COMMAND_REGISTRY.add("mod", ["!mod xxx: sets current mod, lists mods if invalid 
     }
     if (randomizeFightMod) {
         announce(`random mod off`, player, COLORS.ANNOUNCE_BRIGHT, "small");
-        randomizeFightMod=0
-
+        setRandomFightMod(false);
+        maxRoundsPerMod=0
     }
-    currMod = modpoolrand.indexOf(+modidx);
+    currMod = modpoolrand.indexOf(modidx);
    
     printCurrentMod('current fight mod set to ', null, COLORS.ANNOUNCE_BRIGHT)    
     return false;
