@@ -65,10 +65,10 @@ function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
 }
 
 function setModAdvance() {
-    if (currMod!=lastPlayedMod) {
+    if (modpoolrand[currMod]!=lastPlayedMod) {
         roundPlayedOnThatMod=1
     }
-    lastPlayedMod = currMod
+    lastPlayedMod = modpoolrand[currMod]
     roundPlayedOnThatMod++
 }
 
