@@ -67,7 +67,7 @@ function printCurrentMod(msg, player=null, color= COLORS.ANNOUNCE) {
 
 const setModAdvance = () => {
     console.log("setModAdvance", timeoutAdvance)
-    if (timeoutAdvance===null) return;
+    if (timeoutAdvance!==null) return;
 
     timeoutAdvance = setTimeout(() => {
         let cms = modpoolrand[currMod]
